@@ -1,0 +1,28 @@
+int relay=4;
+
+void setup(){
+ pinMode(relay,OUTPUT);
+ Serial.begin(9600); 
+}
+
+
+void loop(){
+ float temp_metr,temp_now ;
+ temp_metr=analogRead(5);//temp_metr is just a number from 0-1023 representing the sensor's Vout
+ delay(10);
+ temp_now= temp_metr*0.49; //watch here http://www.facstaff.bucknell.edu/mastascu/elessonshtml/sensors/TempLM35.html
+ //and here  http://arduino.cc/en/Reference/analogRead
+ //to understand how we calculate the room's temperature in Celsius from the sensor's Vout 
+ Serial.println(temp_now); 
+ 
+ if (temp_now>29)
+ {
+ digitalWrite(relay,HIGH); //and turn on the fan
+ }
+ else
+ {
+   digitalWrite(relay,LOW);
+ }
+
+}
+
